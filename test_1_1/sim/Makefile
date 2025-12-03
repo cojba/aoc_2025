@@ -1,22 +1,22 @@
 # Makefile for safe_dial cocotb testbench
 
 # Simulator configuration
-SIM = questa-compat
-TOPLEVEL_LANG = verilog
+SIM ?= questa-compat
+TOPLEVEL_LANG ?= verilog
+
+# QuestaSim setup
+export SALT_LICENSE_SERVER = 29000@172.31.40.95
+export PATH := /home/ubuntu/questasim/linux_aarch64:$(PATH)
 
 # Project paths
 RTL_DIR = ../rtl
 
-# RTL source files
-VERILOG_SOURCES = $(RTL_DIR)/safe_dial.sv
+# RTL source files - include both safe_dial and mod_barrett
+VERILOG_SOURCES = $(RTL_DIR)/safe_dial.sv $(RTL_DIR)/mod_barrett.sv
 
 # DUT parameters
 DIAL_SIZE ?= 100
 CLK_PERIOD_NS ?= 10
-
-# Export parameters as environment variables for Python testbench
-export DIAL_SIZE
-export CLK_PERIOD_NS
 
 # Toplevel module
 TOPLEVEL = safe_dial
@@ -24,8 +24,8 @@ TOPLEVEL = safe_dial
 # Python test module
 MODULE = test_safe_dial
 
-# QuestaSim specific settings
-# Enable waveform generation and full visibility
+# Waveform dump
+WAVES ?= 1
 
 # Use the patched cocotb environment
 COCOTB_MAKEFILES = /home/ubuntu/.cache/pypoetry/virtualenvs/asd-IvK9WrkW-py3.12/lib/python3.12/site-packages/cocotb_tools/makefiles

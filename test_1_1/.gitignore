@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Simulation artifacts
+sim_build/
+work/
+transcript
+*.wlf
+*.vcd
+*.fsdb
+modelsim.ini
+results.xml
+
+# Editor
+*.swp
+*.swo
+*~
+.DS_Store
